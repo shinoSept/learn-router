@@ -5,6 +5,7 @@ import {
   BsEmojiSunglassesFill,
 } from "react-icons/bs";
 import { type SidebarProps } from "../libs/Sidebar";
+import { Link } from "react-router";
 
 export default function Sidebar({ userName, type }: SidebarProps) {
   return (
@@ -18,10 +19,10 @@ export default function Sidebar({ userName, type }: SidebarProps) {
           <h3 className="navbar-brand">Note App</h3>
           <ul className="navbar-nav">
             <li className="nav-item">
-              <a className="nav-link active" href="#">
+              <Link className="nav-link active" to={"/"}>
                 <BsPlusCircleFill />
                 <span className="d-md-inline px-2">CounterPage</span>
-              </a>
+              </Link>
             </li>
             <li className="nav-item dropdown">
               <a
@@ -35,13 +36,13 @@ export default function Sidebar({ userName, type }: SidebarProps) {
               </a>
               <ul className="dropdown-menu p-2">
                 <li>
-                  <a className="nav-link active" href="#">
+                  <a className="nav-link active" href="/my/hellomynamepage">
                     <BsEmojiSunglassesFill />
                     <span className="d-md-inline px-2">HelloMyNamePage</span>
                   </a>
                 </li>
                 <li>
-                  <a className="nav-link active" href="#">
+                  <a className="nav-link active" href="/my/todolistpage">
                     <BsCalendarCheckFill />
                     <span className="d-md-inline px-2">TodolistPage</span>
                   </a>

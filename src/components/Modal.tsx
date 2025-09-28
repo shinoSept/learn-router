@@ -1,4 +1,31 @@
-export default function Modal() {
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import type { TaskCardProps } from "../libs/Todolist";
+type props = {
+  onAdd: (todo: TaskCardProps) => void;
+};
+export default function Modal({ onAdd }: props) {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const titleOnChange = (event: any) => {
+    setTitle(event.target.value);
+  };
+  const descriptionOnChange = (event: any) => {
+    setDescription(event.target.value);
+  };
+  const submitSave = () => {
+    if (title.trim()) {
+      const newTodo = {
+        id: uuidv4(),
+        title,
+        description,
+        isDone: false,
+      };
+      onAdd(newTodo);
+      setTitle("");
+      setDescription("");
+    }
+  };
   return (
     <div className="modal fade" id="todoModal" tabIndex={-1} aria-hidden="true">
       <div className="modal-dialog">
@@ -17,12 +44,14 @@ export default function Modal() {
               type="text"
               className="form-control mb-2"
               placeholder="Title Todo"
-              value=""
+              value={title}
+              onChange={titleOnChange}
             />
             <textarea
               className="form-control"
               placeholder="description..."
-              value=""
+              value={description}
+              onChange={descriptionOnChange}
             ></textarea>
           </div>
           <div className="modal-footer">
@@ -34,7 +63,11 @@ export default function Modal() {
             >
               Cancel
             </button>
-            <button type="button" className="btn btn-success">
+            <button
+              type="button"
+              className="btn btn-success"
+              onClick={submitSave}
+            >
               Save
             </button>
           </div>
